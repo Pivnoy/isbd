@@ -1,6 +1,6 @@
 package models
 
 type User struct {
-	name string
-	age  uint
+	Name string
+	Age  uint
 }
