@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="531fcab1-6811-4ad7-9263-9e742eb52f74" name="leha">
+        <fileTransfer rootFolder="/home/evg/isbd" accessType="SFTP" host="149.126.17.219" port="2222" sshConfigId="e7caf655-1d70-495d-af89-e97de78c8fb0" sshConfig="evg@149.126.17.219:2222">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
