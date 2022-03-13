@@ -6,4 +6,4 @@ build:
 	go build main/app.go
 
 run:
-	./app
+	./app 127.0.0.1 6000 postgres lehavnuk postgres
