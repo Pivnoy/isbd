@@ -38,8 +38,10 @@ func main() {
 	}
 	router := mux.NewRouter()
 	router.HandleFunc("/", BasicHandler)
+	router.HandleFunc("/stats/job", GetJoblessAllHandler)
 	http.Handle("/", router)
 	err = http.ListenAndServe(":7000", router)
+
 	if err != nil {
 		return
 	}
