@@ -8,7 +8,7 @@ import (
 func GetAllJobless() (models.JoblessResponse, error) {
 	rows, err := server.DbInstance.Query("select * from human")
 	if err != nil {
-		panic("Error in going to jobless table")
+		panic("Error in going to human table")
 	}
 	res, err := models.CreateJoblessCollection(rows)
 	if err != nil {
