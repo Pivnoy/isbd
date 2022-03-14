@@ -5,8 +5,8 @@ import (
 	"github.com/Pivnoy/isbd/server"
 )
 
-func GetAllJobless() (models.JoblessResponse, error) {
-	rows, err := server.DbInstance.Query("select * from human")
+func GetJoblessCountry(countryName string) (models.JoblessResponse, error) {
+	rows, err := server.DbInstance.Query("select * from human where country_name = ?", countryName)
 	if err != nil {
 		panic("Error in going to human table")
 	}

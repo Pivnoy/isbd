@@ -25,9 +25,10 @@ func prepareArgs(arg []string) {
 	}
 }
 
-func GetJoblessAllHandler(w http.ResponseWriter, r *http.Request) {
+func TestCects(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-type", "application/json")
-	response, err := service.GetAllJobless()
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	response, err := service.GetSects()
 	if err != nil {
 		panic("Error in serv Jobless")
 	}
@@ -35,7 +36,6 @@ func GetJoblessAllHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		return
 	}
-
 }
 
 func main() {
@@ -45,7 +45,7 @@ func main() {
 
 	router := mux.NewRouter()
 	router.HandleFunc("/", BasicHandler)
-	router.HandleFunc("/stats/job", GetJoblessAllHandler)
+	router.HandleFunc("/sect", TestCects).Methods("GET")
 	http.Handle("/", router)
 	err := http.ListenAndServe(":7000", router)
 	if err != nil {

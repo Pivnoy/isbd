@@ -7,7 +7,7 @@ type JoblessResponse struct {
 	Jobless_c int     `json:"jobless_c"`
 }
 
-type Jobless struct {
+type Human struct {
 	Id         int
 	Name       string
 	Weight     int
@@ -16,8 +16,8 @@ type Jobless struct {
 	Country_id string
 }
 
-func parseJobless(rows *sql.Rows) (Jobless, error) {
-	c := Jobless{}
+func parseHuman(rows *sql.Rows) (Human, error) {
+	c := Human{}
 	err := rows.Scan(&c.Id, &c.Name, &c.Weight, &c.Employment, &c.Salary, &c.Country_id)
 	if err != nil {
 		panic("Error in parse Channel")
@@ -25,10 +25,10 @@ func parseJobless(rows *sql.Rows) (Jobless, error) {
 	return c, nil
 }
 
-func CreateJoblessCollection(rows *sql.Rows) ([]Jobless, error) {
-	var joblessCollection []Jobless
+func CreateHumanCollection(rows *sql.Rows) ([]Human, error) {
+	var joblessCollection []Human
 	for rows.Next() {
-		j, err := parseJobless(rows)
+		j, err := parseHuman(rows)
 		if err != nil {
 			panic("Error in parsing array of Channels")
 		}
