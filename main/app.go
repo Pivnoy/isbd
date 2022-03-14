@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/Pivnoy/isbd/models"
 	"github.com/Pivnoy/isbd/server"
 	"github.com/Pivnoy/isbd/service"
 	"github.com/gorilla/mux"
@@ -28,11 +27,11 @@ func prepareArgs(arg []string) {
 
 func GetJoblessAllHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-type", "application/json")
-	count, ver, err := service.GetAllJobless()
+	response, err := service.GetAllJobless()
 	if err != nil {
 		panic("Error in serv Jobless")
 	}
-	err = json.NewEncoder(w).Encode(models.JoblessResponse{Jobless: ver, Jobless_c: count})
+	err = json.NewEncoder(w).Encode(response)
 	if err != nil {
 		return
 	}
