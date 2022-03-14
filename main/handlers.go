@@ -98,29 +98,29 @@ func GetCrazyAllHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func GetPunitiveHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-type", "application/json")
-	var punitive models.Punitive
+//func GetPunitiveHandler(w http.ResponseWriter, r *http.Request) {
+//	w.Header().Set("Content-type", "application/json")
+//	var punitive models.Punitive
+//
+//	// do smth
+//
+//	err := json.NewEncoder(w).Encode(punitive)
+//	if err != nil {
+//		return
+//	}
+//}
 
-	// do smth
-
-	err := json.NewEncoder(w).Encode(punitive)
-	if err != nil {
-		return
-	}
-}
-
-func GetSectsHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-type", "application/json")
-	var sects models.Sects
-
-	// do smth
-
-	err := json.NewEncoder(w).Encode(sects)
-	if err != nil {
-		return
-	}
-}
+//func GetSectsHandler(w http.ResponseWriter, r *http.Request) {
+//	w.Header().Set("Content-type", "application/json")
+//	var sects models.Sects
+//
+//	// do smth
+//
+//	err := json.NewEncoder(w).Encode(sects)
+//	if err != nil {
+//		return
+//	}
+//}
 
 // DoAttackSectHandler тут лёха в респонс ничего не ждет
 func DoAttackSectHandler(w http.ResponseWriter, r *http.Request) {
