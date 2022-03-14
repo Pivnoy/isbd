@@ -17,4 +17,10 @@ var routes = Routes{
 	Route{"GetReptiloidsCountry", "GET", "/stats/reptiloids/", GetReptiloidsCountryHandler},
 	Route{"GetReptiloidsAll", "GET", "/stats/reptiloids", GetReptiloidsAllHandler},
 	Route{"GetCountry", "GET", "/stats/country/", GetCountryHandler},
+	Route{"GetCrazyCountry", "GET", "/stats/crazy/", GetCrazyCountryHandler},
+	Route{"GetCrazyAll", "GET", "/stats/crazy", GetCrazyAllHandler},
+	Route{"GetPunitive", "GET", "/punitive", GetPunitiveHandler},
+	Route{"GetSects", "GET", "/sects", GetSectsHandler},
+	Route{"DoAttackSect", "GET", "/attack_sect", DoAttackSectHandler},
+	Route{"DoMorph", "GET", "/morph", DoMorphHandler},
 }
