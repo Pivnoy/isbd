@@ -5,14 +5,14 @@ import (
 	"github.com/Pivnoy/isbd/server"
 )
 
-func GetAllJobless() (int, float32, error) {
+func GetAllJobless() (models.JoblessResponse, error) {
 	rows, err := server.DbInstance.Query("select * from human")
 	if err != nil {
 		panic("Error in going to jobless table")
 	}
 	res, err := models.CreateJoblessCollection(rows)
 	if err != nil {
-		return 0, 0, err
+		return models.JoblessResponse{}, err
 	}
 	var count int // кол-во безработных
 	for _, jobless := range res {
@@ -21,5 +21,5 @@ func GetAllJobless() (int, float32, error) {
 		}
 	}
 	ver := float32(count) / float32(len(res)) // процентное соотношение
-	return count, ver, nil
+	return models.JoblessResponse{Jobless: ver, Jobless_c: count}, nil
 }
