@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/Pivnoy/isbd/models"
 	"github.com/Pivnoy/isbd/server"
 	"github.com/gorilla/mux"
 	"net/http"
@@ -27,10 +28,18 @@ func main() {
 	initArgs := os.Args[1:]
 	prepareArgs(initArgs)
 	server.Init(initArgs)
+	rows, err := server.DbInstance.Query("select id,number,name, theme from channel")
+	if err != nil {
+		panic("")
+	}
+	chanColl := models.CreateChannelCollection(rows)
+	for _, v := range chanColl {
+		fmt.Println(v)
+	}
 	router := mux.NewRouter()
 	router.HandleFunc("/", BasicHandler)
 	http.Handle("/", router)
-	err := http.ListenAndServe(":7000", router)
+	err = http.ListenAndServe(":7000", router)
 	if err != nil {
 		return
 	}
