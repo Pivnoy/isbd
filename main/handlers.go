@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"github.com/Pivnoy/isbd/models"
-	"github.com/Pivnoy/isbd/service"
 	"net/http"
 )
 
@@ -21,18 +20,17 @@ func GetJoblessCountryHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func GetJoblessAllHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-type", "application/json")
-	result, err := service.GetAllJobless()
-	if err != nil {
-		panic("Error in serv Jobless")
-	}
-	err = json.NewEncoder(w).Encode(result)
-	if err != nil {
-		return
-	}
-
-}
+//func GetJoblessAllHandler(w http.ResponseWriter, r *http.Request) {
+//	w.Header().Set("Content-type", "application/json")
+//	result, err := service.GetAllJobless()
+//	if err != nil {
+//		panic("Error in serv Jobless")
+//	}
+//	err = json.NewEncoder(w).Encode(result)
+//	if err != nil {
+//		return
+//	}
+//}
 
 func GetReptiloidsCountryHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-type", "application/json")
