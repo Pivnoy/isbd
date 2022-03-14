@@ -6,19 +6,19 @@ import (
 	"net/http"
 )
 
-func GetJoblessCountryHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-type", "application/json")
-	//params := r.URL.Query()
-	//country_name := params.Get("country_name")
-	var jobless models.Jobless
-
-	// do smth
-
-	err := json.NewEncoder(w).Encode(jobless)
-	if err != nil {
-		return
-	}
-}
+//func GetJoblessCountryHandler(w http.ResponseWriter, r *http.Request) {
+//	w.Header().Set("Content-type", "application/json")
+//	//params := r.URL.Query()
+//	//country_name := params.Get("country_name")
+//	var jobless models.Human
+//
+//	// do smth
+//
+//	err := json.NewEncoder(w).Encode(jobless)
+//	if err != nil {
+//		return
+//	}
+//}
 
 //func GetJoblessAllHandler(w http.ResponseWriter, r *http.Request) {
 //	w.Header().Set("Content-type", "application/json")

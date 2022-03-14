@@ -1,12 +1,13 @@
 package service
 
+// добавить количество всех людей
 import (
 	"github.com/Pivnoy/isbd/models"
 	"github.com/Pivnoy/isbd/server"
 )
 
 func GetJoblessCountry(countryName string) (models.JoblessResponse, error) {
-	rows, err := server.DbInstance.Query("select * from human where country_name = ?", countryName)
+	rows, err := server.DbInstance.Query("select * from human where country_name = $1", countryName)
 	if err != nil {
 		panic("Error in going to human table")
 	}
@@ -20,6 +21,6 @@ func GetJoblessCountry(countryName string) (models.JoblessResponse, error) {
 			count += 1
 		}
 	}
-	ver := float32(count) / float32(len(res)) // процентное соотношение
-	return models.JoblessResponse{Jobless: ver, Jobless_c: count}, nil
+
+	return models.JoblessResponse{Jobless: float32(count) / float32(len(res)), JoblessC: count, PeopleAmount: len(res)}, nil
 }

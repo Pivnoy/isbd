@@ -3,8 +3,9 @@ package models
 import "database/sql"
 
 type JoblessResponse struct {
-	Jobless   float32 `json:"jobless"`
-	Jobless_c int     `json:"jobless_c"`
+	Jobless  float32 `json:"jobless"`
+	JoblessC int     `json:"jobless_c"`
+	PeopleAmount int `json:"people_amount"`
 }
 
 type Human struct {
@@ -12,13 +13,13 @@ type Human struct {
 	Name       string
 	Weight     int
 	Employment bool
-	Salary     int
-	Country_id string
+	Salary    int
+	CountryName string
 }
 
 func parseHuman(rows *sql.Rows) (Human, error) {
 	c := Human{}
-	err := rows.Scan(&c.Id, &c.Name, &c.Weight, &c.Employment, &c.Salary, &c.Country_id)
+	err := rows.Scan(&c.Id, &c.Name, &c.Weight, &c.Employment, &c.Salary, &c.CountryName)
 	if err != nil {
 		panic("Error in parse Channel")
 	}

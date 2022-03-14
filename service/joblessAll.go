@@ -20,6 +20,5 @@ func GetAllJobless() (models.JoblessResponse, error) {
 			count += 1
 		}
 	}
-	ver := float32(count) / float32(len(res)) // процентное соотношение
-	return models.JoblessResponse{Jobless: ver, Jobless_c: count}, nil
+	return models.JoblessResponse{Jobless: float32(count) / float32(len(res)), JoblessC: count, PeopleAmount: len(res)}, nil
 }

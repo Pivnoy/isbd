@@ -27,6 +27,7 @@ func prepareArgs(arg []string) {
 
 /* обработчики пока что тут, в дальнейшем они будут в handlers.go */
 
+// GetSectsHandler  '/sect'
 func GetSectsHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-type", "application/json")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -40,6 +41,7 @@ func GetSectsHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// GetPunitiveHandler '/punitive'
 func GetPunitiveHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-type", "application/json")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -48,6 +50,38 @@ func GetPunitiveHandler(w http.ResponseWriter, r *http.Request) {
 		panic("Error in serv Jobless")
 	}
 	err = json.NewEncoder(w).Encode(response)
+	if err != nil {
+		return
+	}
+}
+
+/* GetJoblessCountryHandler  ('/stats/job?country_name=<name>') если нет параметров, то передает управление GetJoblessAllHandler*/
+func GetJoblessCountryHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	params := r.URL.Query()
+	countryName := params.Get("country_name")
+	if countryName == "" {
+		GetJoblessAllHandler(w, r)
+	} else {
+		result, err := service.GetJoblessCountry(countryName)
+		if err != nil {
+			panic("Error in serv Jobless Country")
+		}
+		err = json.NewEncoder(w).Encode(result)
+		if err != nil {
+			return
+		}
+	}
+}
+
+func GetJoblessAllHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-type", "application/json")
+	result, err := service.GetAllJobless()
+	if err != nil {
+		panic("Error in serv Jobless")
+	}
+	err = json.NewEncoder(w).Encode(result)
 	if err != nil {
 		return
 	}
@@ -62,6 +96,7 @@ func main() {
 	router.HandleFunc("/", BasicHandler)
 	router.HandleFunc("/sect", GetSectsHandler).Methods("GET")
 	router.HandleFunc("/punitive", GetPunitiveHandler).Methods("GET")
+	router.HandleFunc("/stats/job", GetJoblessCountryHandler).Methods("GET")
 
 	http.Handle("/", router)
 	err := http.ListenAndServe(":7000", router)
