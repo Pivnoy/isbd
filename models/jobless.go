@@ -2,14 +2,23 @@ package models
 
 import "database/sql"
 
+type JoblessResponse struct {
+	Jobless   float32 `json:"jobless"`
+	Jobless_c int     `json:"jobless_c"`
+}
+
 type Jobless struct {
-	jobless   float32 `json:"jobless"`
-	jobless_c int     `json:"jobless_c"`
+	Id         int
+	Name       string
+	Weight     int
+	Employment bool
+	Salary     int
+	Country_id string
 }
 
 func parseJobless(rows *sql.Rows) (Jobless, error) {
 	c := Jobless{}
-	err := rows.Scan(&c.jobless, &c.jobless_c)
+	err := rows.Scan(&c.Id, &c.Name, &c.Weight, &c.Employment, &c.Salary, &c.Country_id)
 	if err != nil {
 		panic("Error in parse Channel")
 	}
