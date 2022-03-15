@@ -25,5 +25,5 @@ func GetCrazyAll() (models.CrazyResponse, error) {
 		return models.CrazyResponse{}, err
 	}
 
-	return models.CrazyResponse{Crazy: float32(len(res)) / float32(len(hum)), Crazy_c: len(res)}, nil
+	return models.CrazyResponse{Crazy: float32(len(res)) / float32(len(hum)), CrazyC: len(res), PeopleAmount: len(hum)}, nil
 }

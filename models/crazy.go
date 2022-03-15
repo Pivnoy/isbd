@@ -3,8 +3,9 @@ package models
 import "database/sql"
 
 type CrazyResponse struct {
-	Crazy   float32 `json:"crazy"`
-	Crazy_c int     `json:"crazy_c"`
+	Crazy        float32 `json:"crazy"`
+	CrazyC       int     `json:"crazy_c"`
+	PeopleAmount int     `json:"people_amount"`
 }
 
 type Crazy struct {
