@@ -121,6 +121,19 @@ func GetCrazyAllHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func GetReptiloidsCountryHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	result, err := service.GetAllReptiloids()
+	if err != nil {
+		panic("Error in serv Reptil")
+	}
+	err = json.NewEncoder(w).Encode(result)
+	if err != nil {
+		return
+	}
+}
+
 func main() {
 	initArgs := os.Args[1:]
 	prepareArgs(initArgs)
@@ -132,6 +145,7 @@ func main() {
 	router.HandleFunc("/punitive", GetPunitiveHandler).Methods("GET")
 	router.HandleFunc("/stats/job", GetJoblessCountryHandler).Methods("GET")
 	router.HandleFunc("/stats/crazy", GetCrazyCountryHandler).Methods("GET")
+	router.HandleFunc("/stats/reptiloids", GetReptiloidsCountryHandler).Methods("GET")
 
 	http.Handle("/", router)
 	err := http.ListenAndServe(":7000", router)

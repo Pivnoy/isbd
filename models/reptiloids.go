@@ -1,9 +1,15 @@
 package models
 
-type Reptiloids struct {
-	tv          float32  `json:"tv"`
-	business    float32  `json:"business"`
-	science     float32  `json:"science"`
-	countries   []string `json:"countries"`
-	countries_p int      `json:"countries_p"`
+type ReptiloidsResponseAll struct {
+	Tv         float32  `json:"tv"`
+	Business   float32  `json:"business"`
+	Science    float32  `json:"science"`
+	Countries  []string `json:"countries"`
+	CountriesP float32  `json:"countries_p"`
+}
+
+type RepriloidResponseCountry struct {
+	Tv       float32 `json:"tv"`
+	Business float32 `json:"business"`
+	Science  float32 `json:"science"`
 }

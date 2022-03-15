@@ -32,23 +32,23 @@ import (
 //	}
 //}
 
-func GetReptiloidsCountryHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-type", "application/json")
-	//params := r.URL.Query()
-	//country_name := params.Get("country_name")
-	var reptiloids models.Reptiloids
-
-	// do smth
-
-	err := json.NewEncoder(w).Encode(reptiloids)
-	if err != nil {
-		return
-	}
-}
+//func GetReptiloidsCountryHandler(w http.ResponseWriter, r *http.Request) {
+//	w.Header().Set("Content-type", "application/json")
+//	//params := r.URL.Query()
+//	//country_name := params.Get("country_name")
+//	var reptiloids models.Reptiloids
+//
+//	// do smth
+//
+//	err := json.NewEncoder(w).Encode(reptiloids)
+//	if err != nil {
+//		return
+//	}
+//}
 
 func GetReptiloidsAllHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-type", "application/json")
-	var reptiloids models.Reptiloids
+	var reptiloids models.RepriloidResponseCountry
 
 	// do smth
 
