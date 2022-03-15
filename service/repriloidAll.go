@@ -71,7 +71,7 @@ func GetAllReptiloids() (models.ReptiloidsResponseAll, error) {
 	scienceReptil = len(scienceReptilList) // сумма алигаторв в науке
 
 	// список названи стран где президент рептизоид
-	rows, err = server.DbInstance.Query("select country_name from country inner join president p on country.name = p.country_name inner join reptiloid r on p.human_id = r.human_id")
+	rows, err = server.DbInstance.Query("select p.country_name from country inner join president p on country.name = p.country_name inner join reptiloid r on p.human_id = r.human_id group by p.country_name")
 	if err != nil {
 		panic("Error in going to tv work table 2")
 	}
@@ -81,7 +81,7 @@ func GetAllReptiloids() (models.ReptiloidsResponseAll, error) {
 	}
 
 	// процент стран где рептилоид президент
-	rows, err = server.DbInstance.Query("select id from country")
+	rows, err = server.DbInstance.Query("select country.id from country inner join president p on country.name = p.country_name")
 	if err != nil {
 		panic("Error in going to tv work table 2")
 	}
