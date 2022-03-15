@@ -1,8 +1,8 @@
 package models
 
 type Country struct {
-	economics_gep int        `json:"economics_gep"`
-	is_captured   bool       `json:"is_captured"`
-	avg_salary    bool       `json:"avg_salary"`
-	president     *President `json:"president"`
+	EconomicsGep int        `json:"economics_gep"`
+	IsCaptured   bool       `json:"is_captured"`
+	AvgSalary    float32    `json:"avg_salary"`
+	President    *President `json:"president"`
 }
