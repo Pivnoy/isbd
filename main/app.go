@@ -201,6 +201,20 @@ func DoMorphHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 }
 
+func DoAtackSectHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	params := r.URL.Query()
+	sectName := params.Get("sect_name")
+	punitiveName := params.Get("punitive_name")
+	err := service.DoAttackSect(sectName, punitiveName)
+	if err != nil {
+		panic("Erroe in serv do Attck")
+	}
+	w.WriteHeader(http.StatusOK)
+
+}
+
 func main() {
 	initArgs := os.Args[1:]
 	prepareArgs(initArgs)
@@ -216,6 +230,7 @@ func main() {
 	router.HandleFunc("/human", GetHumanHandler).Methods("GET")
 	router.HandleFunc("/reptiloid", GetReptiloids).Methods("GET")
 	router.HandleFunc("/morph", DoMorphHandler).Methods("GET")
+	router.HandleFunc("/attack_sect", DoAtackSectHandler).Methods("GET")
 
 	http.Handle("/", router)
 	err := http.ListenAndServe(":7000", router)
