@@ -1,11 +1,5 @@
 package main
 
-import (
-	"encoding/json"
-	"github.com/Pivnoy/isbd/models"
-	"net/http"
-)
-
 //func GetJoblessCountryHandler(w http.ResponseWriter, r *http.Request) {
 //	w.Header().Set("Content-type", "application/json")
 //	//params := r.URL.Query()
@@ -58,19 +52,19 @@ import (
 //	}
 //}
 
-func GetCountryHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-type", "application/json")
-	//params := r.URL.Query()
-	//country_name := params.Get("country_name")
-	var country models.Country
-
-	// do smth
-
-	err := json.NewEncoder(w).Encode(country)
-	if err != nil {
-		return
-	}
-}
+//func GetCountryHandler(w http.ResponseWriter, r *http.Request) {
+//	w.Header().Set("Content-type", "application/json")
+//	//params := r.URL.Query()
+//	//country_name := params.Get("country_name")
+//	var country models.Country
+//
+//	// do smth
+//
+//	err := json.NewEncoder(w).Encode(country)
+//	if err != nil {
+//		return
+//	}
+//}
 
 //func GetCrazyCountryHandler(w http.ResponseWriter, r *http.Request) {
 //	w.Header().Set("Content-type", "application/json")
