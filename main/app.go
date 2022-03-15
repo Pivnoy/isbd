@@ -55,7 +55,7 @@ func GetPunitiveHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-/* GetJoblessCountryHandler  ('/stats/job?country_name=<name>') если нет параметров, то передает управление GetJoblessAllHandler*/
+// GetJoblessCountryHandler   ('/stats/job?country_name=<name>') если нет параметров, то передает управление GetJoblessAllHandler*/
 func GetJoblessCountryHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-type", "application/json")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -75,11 +75,45 @@ func GetJoblessCountryHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// GetJoblessAllHandler вызывается при отсутсвии параметров у запроса на '/stats/job'
 func GetJoblessAllHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	result, err := service.GetAllJobless()
 	if err != nil {
 		panic("Error in serv Jobless")
+	}
+	err = json.NewEncoder(w).Encode(result)
+	if err != nil {
+		return
+	}
+}
+
+func GetCrazyCountryHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	params := r.URL.Query()
+	countryName := params.Get("country_name")
+	if countryName == "" {
+		GetCrazyAllHandler(w, r)
+	} else {
+		result, err := service.GetCrazyCountry(countryName)
+		if err != nil {
+			panic("Error in serv Crazy Country")
+		}
+		err = json.NewEncoder(w).Encode(result)
+		if err != nil {
+			return
+		}
+	}
+}
+
+func GetCrazyAllHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	result, err := service.GetCrazyAll()
+	if err != nil {
+		panic("Error in serv Crazy")
 	}
 	err = json.NewEncoder(w).Encode(result)
 	if err != nil {
@@ -97,6 +131,7 @@ func main() {
 	router.HandleFunc("/sect", GetSectsHandler).Methods("GET")
 	router.HandleFunc("/punitive", GetPunitiveHandler).Methods("GET")
 	router.HandleFunc("/stats/job", GetJoblessCountryHandler).Methods("GET")
+	router.HandleFunc("/stats/crazy", GetCrazyCountryHandler).Methods("GET")
 
 	http.Handle("/", router)
 	err := http.ListenAndServe(":7000", router)

@@ -1,6 +1,5 @@
 package service
 
-// добавить количество всех людей
 import (
 	"github.com/Pivnoy/isbd/models"
 	"github.com/Pivnoy/isbd/server"

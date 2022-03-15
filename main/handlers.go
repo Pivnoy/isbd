@@ -72,31 +72,31 @@ func GetCountryHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func GetCrazyCountryHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-type", "application/json")
-	//params := r.URL.Query()
-	//country_name := params.Get("country_name")
-	var crazy models.Crazy
+//func GetCrazyCountryHandler(w http.ResponseWriter, r *http.Request) {
+//	w.Header().Set("Content-type", "application/json")
+//	//params := r.URL.Query()
+//	//country_name := params.Get("country_name")
+//	var crazy models.Crazy
+//
+//	// do smth
+//
+//	err := json.NewEncoder(w).Encode(crazy)
+//	if err != nil {
+//		return
+//	}
+//}
 
-	// do smth
-
-	err := json.NewEncoder(w).Encode(crazy)
-	if err != nil {
-		return
-	}
-}
-
-func GetCrazyAllHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-type", "application/json")
-	var crazy models.Crazy
-
-	// do smth
-
-	err := json.NewEncoder(w).Encode(crazy)
-	if err != nil {
-		return
-	}
-}
+//func GetCrazyAllHandler(w http.ResponseWriter, r *http.Request) {
+//	w.Header().Set("Content-type", "application/json")
+//	var crazy models.Crazy
+//
+//	// do smth
+//
+//	err := json.NewEncoder(w).Encode(crazy)
+//	if err != nil {
+//		return
+//	}
+//}
 
 //func GetPunitiveHandler(w http.ResponseWriter, r *http.Request) {
 //	w.Header().Set("Content-type", "application/json")
