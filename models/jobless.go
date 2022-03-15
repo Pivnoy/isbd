@@ -3,17 +3,17 @@ package models
 import "database/sql"
 
 type JoblessResponse struct {
-	Jobless  float32 `json:"jobless"`
-	JoblessC int     `json:"jobless_c"`
-	PeopleAmount int `json:"people_amount"`
+	Jobless      float32 `json:"jobless"`
+	JoblessC     int     `json:"jobless_c"`
+	PeopleAmount int     `json:"people_amount"`
 }
 
 type Human struct {
-	Id         int
-	Name       string
-	Weight     int
-	Employment bool
-	Salary    int
+	Id          int
+	Name        string
+	Weight      int
+	Employment  bool
+	Salary      int
 	CountryName string
 }
 
