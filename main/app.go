@@ -124,6 +124,25 @@ func GetCrazyAllHandler(w http.ResponseWriter, r *http.Request) {
 func GetReptiloidsCountryHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-type", "application/json")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
+	params := r.URL.Query()
+	countryName := params.Get("country_name")
+	if countryName == "" {
+		GetReptiloidsAllHandler(w, r)
+	} else {
+		result, err := service.GetCountryReptiloids(countryName)
+		if err != nil {
+			panic("Error in serv Reptil")
+		}
+		err = json.NewEncoder(w).Encode(result)
+		if err != nil {
+			return
+		}
+	}
+}
+
+func GetReptiloidsAllHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	result, err := service.GetAllReptiloids()
 	if err != nil {
 		panic("Error in serv Reptil")
@@ -133,6 +152,10 @@ func GetReptiloidsCountryHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 }
+
+
+
+
 
 func main() {
 	initArgs := os.Args[1:]

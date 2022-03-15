@@ -46,17 +46,17 @@ import (
 //	}
 //}
 
-func GetReptiloidsAllHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-type", "application/json")
-	var reptiloids models.RepriloidResponseCountry
-
-	// do smth
-
-	err := json.NewEncoder(w).Encode(reptiloids)
-	if err != nil {
-		return
-	}
-}
+//func GetReptiloidsAllHandler(w http.ResponseWriter, r *http.Request) {
+//	w.Header().Set("Content-type", "application/json")
+//	var reptiloids models.RepriloidResponseCountry
+//
+//	// do smth
+//
+//	err := json.NewEncoder(w).Encode(reptiloids)
+//	if err != nil {
+//		return
+//	}
+//}
 
 func GetCountryHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-type", "application/json")

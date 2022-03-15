@@ -5,7 +5,7 @@ import (
 	"github.com/Pivnoy/isbd/server"
 )
 
-func GetAllReptiloids() (models.RepriloidResponseCountry, error) {
+func GetAllReptiloids() (models.ReptiloidsResponseAll, error) {
 	var tvAll, tvReptiloid int
 	rows, err := server.DbInstance.Query("select a.human_id from tv_work inner join anchorman a on tv_work.anchorman_id = a.id group by human_id")
 	if err != nil {
@@ -13,7 +13,7 @@ func GetAllReptiloids() (models.RepriloidResponseCountry, error) {
 	}
 	tvHumAllList, err := models.CreatePeopleInSphereCollectionCollection(rows)
 	if err != nil {
-		return models.RepriloidResponseCountry{}, err
+		return models.ReptiloidsResponseAll{}, err
 	}
 	tvAll = len(tvHumAllList) // всего челвоек работающих на телевидиние
 
@@ -23,7 +23,7 @@ func GetAllReptiloids() (models.RepriloidResponseCountry, error) {
 	}
 	tvHumRepList, err := models.CreatePeopleInSphereCollectionCollection(rows)
 	if err != nil {
-		return models.RepriloidResponseCountry{}, err
+		return models.ReptiloidsResponseAll{}, err
 	}
 	tvReptiloid = len(tvHumRepList) // рептилоидов на телевединии
 
@@ -35,7 +35,7 @@ func GetAllReptiloids() (models.RepriloidResponseCountry, error) {
 	}
 	buisnessAllList, err := models.CreatePeopleInSphereCollectionCollection(rows)
 	if err != nil {
-		return models.RepriloidResponseCountry{}, err
+		return models.ReptiloidsResponseAll{}, err
 	}
 	buisnessAll = len(buisnessAllList) // сумма людей бизнессменов в бизнессе
 
@@ -45,7 +45,7 @@ func GetAllReptiloids() (models.RepriloidResponseCountry, error) {
 	}
 	buisnessRepList, err := models.CreatePeopleInSphereCollectionCollection(rows)
 	if err != nil {
-		return models.RepriloidResponseCountry{}, err
+		return models.ReptiloidsResponseAll{}, err
 	}
 	buisnessRepriloid = len(buisnessRepList) // Сумма алигаторов в бизнесе
 
@@ -56,7 +56,7 @@ func GetAllReptiloids() (models.RepriloidResponseCountry, error) {
 	}
 	scienceAllList, err := models.CreatePeopleInSphereCollectionCollection(rows)
 	if err != nil {
-		return models.RepriloidResponseCountry{}, err
+		return models.ReptiloidsResponseAll{}, err
 	}
 	scienceAll = len(scienceAllList) // сумма ученых людей в науке
 
@@ -66,9 +66,29 @@ func GetAllReptiloids() (models.RepriloidResponseCountry, error) {
 	}
 	scienceReptilList, err := models.CreatePeopleInSphereCollectionCollection(rows)
 	if err != nil {
-		return models.RepriloidResponseCountry{}, err
+		return models.ReptiloidsResponseAll{}, err
 	}
 	scienceReptil = len(scienceReptilList) // сумма алигаторв в науке
 
-	return models.RepriloidResponseCountry{Tv: float32(tvReptiloid) / float32(tvAll), Business: float32(buisnessRepriloid) / float32(buisnessAll), Science: float32(scienceReptil) / float32(scienceAll)}, nil
+	// список названи стран где президент рептизоид
+	rows, err = server.DbInstance.Query("select country_name from country inner join president p on country.name = p.country_name inner join reptiloid r on p.human_id = r.human_id")
+	if err != nil {
+		panic("Error in going to tv work table 2")
+	}
+	countryNameList, err := models.CreateCountryReptiloidNameCollection(rows)
+	if err != nil {
+		return models.ReptiloidsResponseAll{}, err
+	}
+
+	// процент стран где рептилоид президент
+	rows, err = server.DbInstance.Query("select id from country")
+	if err != nil {
+		panic("Error in going to tv work table 2")
+	}
+	countryIdList, err := models.CreateCountryReptiloidIdCollection(rows)
+	if err != nil {
+		return models.ReptiloidsResponseAll{}, err
+	}
+
+	return models.ReptiloidsResponseAll{Tv: float32(tvReptiloid) / float32(tvAll), Business: float32(buisnessRepriloid) / float32(buisnessAll), Science: float32(scienceReptil) / float32(scienceAll), Countries: countryNameList, CountriesP: float32(len(countryNameList)) / float32(len(countryIdList))}, nil
 }
