@@ -3,32 +3,33 @@ package models
 import "database/sql"
 
 type JoblessResponse struct {
-	Jobless   float32 `json:"jobless"`
-	Jobless_c int     `json:"jobless_c"`
+	Jobless      float32 `json:"jobless"`
+	JoblessC     int     `json:"jobless_c"`
+	PeopleAmount int     `json:"people_amount"`
 }
 
-type Jobless struct {
-	Id         int
-	Name       string
-	Weight     int
-	Employment bool
-	Salary     int
-	Country_id string
+type Human struct {
+	Id          int
+	Name        string
+	Weight      int
+	Employment  bool
+	Salary      int
+	CountryName string
 }
 
-func parseJobless(rows *sql.Rows) (Jobless, error) {
-	c := Jobless{}
-	err := rows.Scan(&c.Id, &c.Name, &c.Weight, &c.Employment, &c.Salary, &c.Country_id)
+func parseHuman(rows *sql.Rows) (Human, error) {
+	c := Human{}
+	err := rows.Scan(&c.Id, &c.Name, &c.Weight, &c.Employment, &c.Salary, &c.CountryName)
 	if err != nil {
 		panic("Error in parse Channel")
 	}
 	return c, nil
 }
 
-func CreateJoblessCollection(rows *sql.Rows) ([]Jobless, error) {
-	var joblessCollection []Jobless
+func CreateHumanCollection(rows *sql.Rows) ([]Human, error) {
+	var joblessCollection []Human
 	for rows.Next() {
-		j, err := parseJobless(rows)
+		j, err := parseHuman(rows)
 		if err != nil {
 			panic("Error in parsing array of Channels")
 		}

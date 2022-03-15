@@ -1,8 +1,33 @@
 package models
 
+import "database/sql"
+
+type CountryResponse struct {
+	Countrys []Country `json:"countrys"`
+}
+
 type Country struct {
-	economics_gep int        `json:"economics_gep"`
-	is_captured   bool       `json:"is_captured"`
-	avg_salary    bool       `json:"avg_salary"`
-	president     *President `json:"president"`
+	Id   int
+	Name string
+}
+
+func parseCountry(rows *sql.Rows) (Country, error) {
+	c := Country{}
+	err := rows.Scan(&c.Id, &c.Name)
+	if err != nil {
+		panic("Error in parse Channel")
+	}
+	return c, nil
+}
+
+func CreateCountryCollection(rows *sql.Rows) ([]Country, error) {
+	var countryCollection []Country
+	for rows.Next() {
+		j, err := parseCountry(rows)
+		if err != nil {
+			panic("Error in parsing array of Channels")
+		}
+		countryCollection = append(countryCollection, j)
+	}
+	return countryCollection, nil
 }

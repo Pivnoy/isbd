@@ -8,9 +8,9 @@ import (
 func GetAllJobless() (models.JoblessResponse, error) {
 	rows, err := server.DbInstance.Query("select * from human")
 	if err != nil {
-		panic("Error in going to jobless table")
+		panic("Error in going to human table")
 	}
-	res, err := models.CreateJoblessCollection(rows)
+	res, err := models.CreateHumanCollection(rows)
 	if err != nil {
 		return models.JoblessResponse{}, err
 	}
@@ -20,6 +20,5 @@ func GetAllJobless() (models.JoblessResponse, error) {
 			count += 1
 		}
 	}
-	ver := float32(count) / float32(len(res)) // процентное соотношение
-	return models.JoblessResponse{Jobless: ver, Jobless_c: count}, nil
+	return models.JoblessResponse{Jobless: float32(count) / float32(len(res)), JoblessC: count, PeopleAmount: len(res)}, nil
 }
