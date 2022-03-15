@@ -72,5 +72,3 @@ func GetCountryReptiloids(country_name string) (models.RepriloidResponseCountry,
 
 	return models.RepriloidResponseCountry{Tv: float32(tvReptiloid) / float32(tvAll), Business: float32(buisnessRepriloid) / float32(buisnessAll), Science: float32(scienceReptil) / float32(scienceAll)}, nil
 }
-
-
