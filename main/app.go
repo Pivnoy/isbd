@@ -8,6 +8,7 @@ import (
 	"github.com/gorilla/mux"
 	"net/http"
 	"os"
+	"strconv"
 	"strings"
 )
 
@@ -181,6 +182,25 @@ func GetReptiloids(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func DoMorphHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	params := r.URL.Query()
+	humanId, err := strconv.Atoi(params.Get("human_id"))
+	if err != nil {
+		panic("error of parse to int human id")
+	}
+	reptiloidId, err := strconv.Atoi(params.Get("reptiloid_id"))
+	if err != nil {
+		panic("error of parse to int reptiloid id")
+	}
+	err = service.DoMorth(humanId, reptiloidId)
+	if err != nil {
+		panic("Error in serv doMorth")
+	}
+	w.WriteHeader(http.StatusOK)
+}
+
 func main() {
 	initArgs := os.Args[1:]
 	prepareArgs(initArgs)
@@ -195,6 +215,7 @@ func main() {
 	router.HandleFunc("/stats/reptiloids", GetReptiloidsCountryHandler).Methods("GET")
 	router.HandleFunc("/human", GetHumanHandler).Methods("GET")
 	router.HandleFunc("/reptiloid", GetReptiloids).Methods("GET")
+	router.HandleFunc("/morph", DoMorphHandler).Methods("GET")
 
 	http.Handle("/", router)
 	err := http.ListenAndServe(":7000", router)

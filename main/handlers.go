@@ -122,20 +122,20 @@ func GetCountryHandler(w http.ResponseWriter, r *http.Request) {
 //	}
 //}
 
-// DoAttackSectHandler тут лёха в респонс ничего не ждет
-func DoAttackSectHandler(w http.ResponseWriter, r *http.Request) {
-	//params := r.URL.Query()
-	//sect_name := params.Get("sect_name")
-	//punitive_name := params.Get("punitive_name")
-
-	w.WriteHeader(http.StatusOK)
-}
-
-// DoMorphHandler тут тоже лёха в респонс ничего не ждет
-func DoMorphHandler(w http.ResponseWriter, r *http.Request) {
-	//params := r.URL.Query()
-	//human_id := params.Get("human_id")
-	//rep_id := params.Get("rep_id")
-
-	w.WriteHeader(http.StatusOK)
-}
+//// DoAttackSectHandler тут лёха в респонс ничего не ждет
+//func DoAttackSectHandler(w http.ResponseWriter, r *http.Request) {
+//	//params := r.URL.Query()
+//	//sect_name := params.Get("sect_name")
+//	//punitive_name := params.Get("punitive_name")
+//
+//	w.WriteHeader(http.StatusOK)
+//}
+//
+//// DoMorphHandler тут тоже лёха в респонс ничего не ждет
+//func DoMorphHandler(w http.ResponseWriter, r *http.Request) {
+//	//params := r.URL.Query()
+//	//human_id := params.Get("human_id")
+//	//rep_id := params.Get("rep_id")
+//
+//	w.WriteHeader(http.StatusOK)
+//}
